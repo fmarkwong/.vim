@@ -23,8 +23,10 @@
 
 "https://github.com/junegunn/vim-plug
 "command:  :PlugInstall
+"before install, need to ,s to source .vimrc
 
 call plug#begin('~/.vim/plugged')
+  Plug 'joonty/vdebug'
   Plug 'sheerun/vim-polyglot'
   Plug 'wesgibbs/vim-irblack'
   Plug 'mileszs/ack.vim'
@@ -32,9 +34,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-scripts/matchit.zip'
   Plug 'scrooloose/syntastic'
   Plug 'bling/vim-airline'
-  Plug 'tpope/vim-endwise'
-  Plug 'szw/vim-maximizer'
-  Plug 'tpope/vim-rails'
   Plug 'rking/ag.vim'
   Plug 'vim-scripts/greplace.vim'
   Plug 'tpope/vim-fugitive'
@@ -43,12 +42,18 @@ call plug#begin('~/.vim/plugged')
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'tomtom/tcomment_vim'
-  Plug 'tpope/vim-cucumber'
   Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-surround'
   Plug 'majutsushi/tagbar'
-  " Plug 'syntastic/syntax_checkers/ruby/rubylint.vim'
+  Plug 'vim-php/tagbar-phpctags.vim'
   Plug 'airblade/vim-gitgutter'
+  Plug 'tobyS/pdv' | Plug 'tobyS/vmustache'
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  " Plug 'tpope/vim-endwise'
+  " Plug 'szw/vim-maximizer'
+  " Plug 'tpope/vim-rails'
+  " Plug 'tpope/vim-cucumber'
+  " Plug 'syntastic/syntax_checkers/ruby/rubylint.vim'
 call plug#end()
 
 " seoul256 (dark):
@@ -86,6 +91,34 @@ endif
 " Toggle Tagbar
 nmap <leader>t :TagbarOpenAutoClose<CR>
 
+set updatetime=1000
+" Ignore variables in Tagbar
+let g:tagbar_type_php = {
+    \ 'kinds' : [
+        \ 'i:interfaces',
+        \ 'c:classes',
+        \ 'd:constant definitions:0:0',
+        \ 'f:functions',
+        \ 'j:javascript functions',
+    \ ],
+\ }
+
+let g:vdebug_options = {
+\ 'path_maps': {"/home/vagrant/zidisha2": "/Users/mark/Development/zidisha_dev/zidisha2",
+\               "/home/vagrant/projects": "/Users/mark/Development/learning/laracasts/homestead_projects"},
+\ 'port': 10000,
+\ 'break_on_open': 0
+\}
+
+" PHP documentor
+let g:pdv_template_dir = $HOME . "/.vim/plugged/pdv/templates_snip"
+nnoremap <leader>d :call pdv#DocumentWithSnip()<CR>
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-!>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " open current file in MacVim
 nnoremap <leader>m :execute "! mvim +" . line(".") " -R %"<CR>  
 " toggle pastemode
@@ -96,6 +129,10 @@ set showmode
 nnoremap <leader>p :set invpaste paste?<CR>
 set pastetoggle=<leader>p
 set showmode
+
+" https://stackoverflow.com/questions/8958047/in-vim-is-there-a-way-to-save-bookmarks-between-sessions
+:set viminfo='1000,f1
+
 
 "Greplace - use ag instead of grep
 " http://robots.thoughtbot.com/faster-grepping-in-vim
@@ -122,8 +159,12 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " statuline for Airline plugin
 " let g:airline#extensions#default#layout = [ [ 'c', 'b', 'a' ], [ 'x', 'y', 'z', 'warning' ] ]
 " let g:airline#extensions#default#layout = [ [ 'c', 'b'], [ 'x', 'z'] ]
-let g:airline#extensions#default#layout = [ [ 'c', 'b'], ['z'] ]
-let g:airline#extensions#tagbar#enabled = 0
+" let g:airline_section_b = '%{getcwd()}'
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline_section_t = '%{tagbar#currenttag("[%s] ","")}'
+" let g:airline#extensions#default#layout = [ [ 'c', 'b'], ['z'] ]
+let g:airline#extensions#default#layout = [ [ 'c', 'b'], ['t', 'z'] ]
+" let g:airline#extensions#tagbar#flags = ''
 function! AirlineInit()
 " let g:airline_section_a = airline#section#create(['%f'])
 " let g:airline_section_b = airline#section#create(['branch'])
