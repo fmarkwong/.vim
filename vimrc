@@ -25,6 +25,11 @@
 "command:  :PlugInstall
 "before install, need to ,s to source .vimrc
 
+" Install vim-plug if not installed
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
 call plug#begin('~/.vim/plugged')
   Plug 'joonty/vdebug'
   Plug 'sheerun/vim-polyglot'
@@ -32,7 +37,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'mileszs/ack.vim'
   Plug 'vim-scripts/bufkill.vim'
   Plug 'vim-scripts/matchit.zip'
-  Plug 'scrooloose/syntastic'
   Plug 'bling/vim-airline'
   Plug 'rking/ag.vim'
   Plug 'vim-scripts/greplace.vim'
@@ -48,7 +52,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-php/tagbar-phpctags.vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'tobyS/pdv' | Plug 'tobyS/vmustache'
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'frozen': 1 }
+  Plug 'stephpy/vim-php-cs-fixer'
+  Plug 'joonty/vim-phpqa'
+  " Plug 'scrooloose/syntastic'
   " Plug 'tpope/vim-endwise'
   " Plug 'szw/vim-maximizer'
   " Plug 'tpope/vim-rails'
@@ -69,6 +76,8 @@ let mapleader=","
 set diffopt=vertical
 set clipboard=unnamed
 
+set nocompatible
+
 set t_Co=256
 
 " Send more characters for redraws
@@ -88,8 +97,26 @@ set mouse=nicr
 set ttymouse=xterm2
 endif
 
+" PHPQa
+let g:phpqa_codesniffer_cmd='$HOME/Development/zidisha_dev/zidisha2/vendor/bin/phpcs'
+let g:phpqa_messdetector_cmd='$HOME/Development/zidisha_dev/zidisha2/vendor/bin/phpmd'
+let g:phpqa_messdetector_autorun = 0
+let g:phpqa_codesniffer_autorun = 0
+let g:phpqa_open_loc = 0
+
+"PHP-cs-fixer
+let g:php_cs_fixer_path = '$HOME/zidisha2/vendor/bin/php-cs-fixer'
+let g:php_cs_fixer_level = "psr2"
+let g:php_cs_fixer_fixers_list = 'phpdoc_params,align_double_arrow,align_equals,no_blank_lines_before_namespace'
+nnoremap <silent><leader>fi :call PhpCsFixerFixFile()<CR>
+
+
+
+
 " Toggle Tagbar
-nmap <leader>t :TagbarOpenAutoClose<CR>
+" nmap <leader>t :TagbarOpenAutoClose<CR>
+nmap <leader>t :TagbarToggle<CR>
+let g:tagbar_autoclose = 0
 
 set updatetime=1000
 " Ignore variables in Tagbar
@@ -115,9 +142,11 @@ let g:pdv_template_dir = $HOME . "/.vim/plugged/pdv/templates_snip"
 nnoremap <leader>d :call pdv#DocumentWithSnip()<CR>
 
 " Ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-!>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+nnoremap <tab> :call UltiSnips#ExpandSnippetOrJump()<CR> 
+" nnoremap <D-tab> :call UltiSnips#JumpBackwards()<CR> 
 
 " open current file in MacVim
 nnoremap <leader>m :execute "! mvim +" . line(".") " -R %"<CR>  
@@ -193,7 +222,7 @@ nmap <leader>s :source $MYVIMRC<CR>
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/"<CR>
 
 " Obsession, restore session
-nnoremap <leader>r :source ~/.vim/sessions/notes_session.vim<CR>
+nnoremap <leader>r :source ~/.vim/sessions/current_session.vim<CR>
 
 " fuzzyfinder keybindings
 "nnoremap <leader>y :FufFile<CR>
