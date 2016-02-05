@@ -31,6 +31,10 @@ if empty(glob("~/.vim/autoload/plug.vim"))
 endif
 
 call plug#begin('~/.vim/plugged')
+  Plug 'Raimondi/delimitMate'
+  Plug 'captbaritone/better-indent-support-for-php-with-html'
+  Plug 'tell-k/vim-browsereload-mac'
+  Plug 'Chiel92/vim-autoformat'
   Plug 'joonty/vdebug'
   Plug 'sheerun/vim-polyglot'
   Plug 'wesgibbs/vim-irblack'
@@ -54,8 +58,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'tobyS/pdv' | Plug 'tobyS/vmustache'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'frozen': 1 }
   Plug 'stephpy/vim-php-cs-fixer'
-  Plug 'joonty/vim-phpqa'
-  " Plug 'scrooloose/syntastic'
+  " Plug '2072/PHP-Indenting-for-VIm'
+  " Plug 'phpfmt/vim-phpfmt'
+  " Plug 'joonty/vim-phpqa'
+  Plug 'scrooloose/syntastic'
   " Plug 'tpope/vim-endwise'
   " Plug 'szw/vim-maximizer'
   " Plug 'tpope/vim-rails'
@@ -72,6 +78,8 @@ call plug#end()
 " colo seoul25
 
 let mapleader=","
+filetype indent on
+
 
 set diffopt=vertical
 set clipboard=unnamed
@@ -97,15 +105,25 @@ set mouse=nicr
 set ttymouse=xterm2
 endif
 
+" for browserreload-mac plugin https://browsereload-macvim.readthedocs.org/en/latest/
+" :ChromeReloadStart
+" :ChromeReloadStop
+let g:returnApp = 'iTerm' " refocus back to iTerm after reload
+" let g:returnAppFlag = 0 " prevent refocus to terminal 
+
+"delimit
+set backspace=2
+let delimitMate_expand_cr = 2
+
 " PHPQa
-let g:phpqa_codesniffer_cmd='$HOME/Development/zidisha_dev/zidisha2/vendor/bin/phpcs'
-let g:phpqa_messdetector_cmd='$HOME/Development/zidisha_dev/zidisha2/vendor/bin/phpmd'
-let g:phpqa_messdetector_autorun = 0
-let g:phpqa_codesniffer_autorun = 0
-let g:phpqa_open_loc = 0
+" let g:phpqa_codesniffer_cmd='$HOME/Development/zidisha_dev/zidisha2/vendor/bin/phpcs'
+" let g:phpqa_messdetector_cmd='$HOME/Development/zidisha_dev/zidisha2/vendor/bin/phpmd'
+" let g:phpqa_messdetector_autorun = 0
+" let g:phpqa_codesniffer_autorun = 0
+" let g:phpqa_open_loc = 1
 
 "PHP-cs-fixer
-let g:php_cs_fixer_path = '$HOME/zidisha2/vendor/bin/php-cs-fixer'
+" let g:php_cs_fixer_path = '$HOME/zidisha2/vendor/bin/php-cs-fixer'
 let g:php_cs_fixer_level = "psr2"
 let g:php_cs_fixer_fixers_list = 'phpdoc_params,align_double_arrow,align_equals,no_blank_lines_before_namespace'
 nnoremap <silent><leader>fi :call PhpCsFixerFixFile()<CR>
@@ -117,6 +135,7 @@ nnoremap <silent><leader>fi :call PhpCsFixerFixFile()<CR>
 " nmap <leader>t :TagbarOpenAutoClose<CR>
 nmap <leader>t :TagbarToggle<CR>
 let g:tagbar_autoclose = 0
+let g:tagbar_autofocus = 1
 
 set updatetime=1000
 " Ignore variables in Tagbar
@@ -130,9 +149,13 @@ let g:tagbar_type_php = {
     \ ],
 \ }
 
+" need to go into this file and change ip address to match host machine(OS X),
+" it changes often. Or else debugger won't work
+" sudo vim /etc/php5/cli/conf.d/20-xdebug.ini
+" sudo vim /etc/php5/fpm/conf.d/20-xdebug.ini
 let g:vdebug_options = {
 \ 'path_maps': {"/home/vagrant/zidisha2": "/Users/mark/Development/zidisha_dev/zidisha2",
-\               "/home/vagrant/projects": "/Users/mark/Development/learning/laracasts/homestead_projects"},
+\               "/home/vagrant/projects": "/Users/mark/Development/homestead"},
 \ 'port': 10000,
 \ 'break_on_open': 0
 \}
@@ -145,7 +168,7 @@ nnoremap <leader>d :call pdv#DocumentWithSnip()<CR>
 " let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-nnoremap <tab> :call UltiSnips#ExpandSnippetOrJump()<CR> 
+" nnoremap <tab> :call UltiSnips#ExpandSnippetOrJump()<CR> 
 " nnoremap <D-tab> :call UltiSnips#JumpBackwards()<CR> 
 
 " open current file in MacVim
@@ -179,6 +202,7 @@ endif
 "Syntastic
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
+let g:syntastic_html_tidy_exec = 'tidy'
 
 " change cursor shape in different modes for OSX iTerm2
 " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
@@ -222,7 +246,9 @@ nmap <leader>s :source $MYVIMRC<CR>
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/"<CR>
 
 " Obsession, restore session
-nnoremap <leader>r :source ~/.vim/sessions/current_session.vim<CR>
+nnoremap <leader>rh :source $HOME/.vim/sessions/homestead.vim<CR>
+nnoremap <leader>re :source $HOME/.vim/sessions/editor.vim<CR>
+nnoremap <leader>rz :source $HOME/.vim/sessions/zidisha.vim<CR>
 
 " fuzzyfinder keybindings
 "nnoremap <leader>y :FufFile<CR>
@@ -269,10 +295,10 @@ cnoremap ii <esc>
 " don't map kk and jj in visual mode because need direction keys in this mode
 vnoremap ;; <esc>
 
-
+nnoremap mm :/mod<cr> 
 "Ag search
-nnoremap <leader>f :Ag! <C-R><C-W> app/<cr>
-nnoremap <leader>F :Ag! <C-R><C-W><cr>
+nnoremap <leader>f :Ag! -i <C-R><C-W> app/<cr>
+nnoremap <leader>F :Ag! -i <C-R><C-W><cr>
 
 
 " PLUGINS STUFF
@@ -314,8 +340,8 @@ let g:gitgutter_sign_column_always = 0
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 1
 
-nmap <Leader>rh <Plug>GitGutterRevertHunk
-nmap <Leader>nh <Plug>GitGutterNextHunk
+nmap <Leader>hr <Plug>GitGutterRevertHunk
+nmap <Leader>hn <Plug>GitGutterNextHunk
 nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
 
@@ -324,9 +350,9 @@ nmap [c <Plug>GitGutterPrevHunk
 "
 "enables ruby formatting
 " do gg , =, G to autoformat whole file
-if has("autocmd")
-"   filetype indent on
-endif
+" if has("autocmd")
+" filetype indent on
+" endif
 
 set backspace=indent,eol,start " backspace over everything in insert mode
 set guioptions-=m  "remove menu bar
@@ -356,8 +382,6 @@ filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 filetype plugin indent on
 
-"for Syntastic
-let g:syntastic_enable_signs=1
 
 map <Leader>j :%!python -m json.tool<CR>
 autocmd BufNewFile,BufRead *.json set ft=javascript
