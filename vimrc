@@ -16,7 +16,8 @@
 "
 " Symbolic links
 "
-" ln -s source_file myfile(the link)
+" ln -s source_file destination_file(the link)
+" ln -s ~/.vim/vimrc ~/.vimrc
 " make a symbolic link (~/.vimrc) pointing to ~/.vim/vimrc
 " SHORTCUTS
 " ------------------------------------------
@@ -26,9 +27,14 @@
 "before install, need to ,s to source .vimrc
 
 " Install vim-plug if not installed
-if empty(glob("~/.vim/autoload/plug.vim"))
-    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+
+" disable parallel installation of plugins
+" g:plug_threads = 1
 
 call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
