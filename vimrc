@@ -303,8 +303,11 @@ vnoremap ;; <esc>
 
 nnoremap mm :/mod<cr> 
 "Ag search
-nnoremap <leader>f :Ag! -i <C-R><C-W> app/<cr>
-nnoremap <leader>F :Ag! -i <C-R><C-W><cr>
+nnoremap <leader>f :Ag! <C-R><C-W> app/<cr>
+nnoremap <leader>F :Ag! <C-R><C-W><cr>
+" case insensitive searching
+nnoremap <leader>fi :Ag! -i <C-R><C-W> app/<cr>
+nnoremap <leader>Fi :Ag! -i <C-R><C-W><cr>
 
 
 " PLUGINS STUFF
