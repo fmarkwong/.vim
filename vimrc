@@ -34,7 +34,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " disable parallel installation of plugins
-" g:plug_threads = 1
+let g:plug_threads = 1
 
 call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
