@@ -1,4 +1,6 @@
 # .vim
 in home directory:
 
-https://github.com/fmarkwong/.vim.git
+```bash
+git clone https://github.com/fmarkwong/.vim.git
+```
