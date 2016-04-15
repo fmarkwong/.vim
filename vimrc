@@ -23,8 +23,8 @@
 " ------------------------------------------
 
 "https://github.com/junegunn/vim-plug
-"command:  :PlugInstall
 "before install, need to ,s to source .vimrc
+"command:  :PlugInstall
 
 " Install vim-plug if not installed
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -64,11 +64,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'tobyS/pdv' | Plug 'tobyS/vmustache'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'frozen': 1 }
   Plug 'stephpy/vim-php-cs-fixer'
+  Plug 'craigemery/vim-autotag'
   " Plug '2072/PHP-Indenting-for-VIm'
   " Plug 'phpfmt/vim-phpfmt'
   " Plug 'joonty/vim-phpqa'
   Plug 'scrooloose/syntastic'
-  " Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-endwise'
   " Plug 'szw/vim-maximizer'
   " Plug 'tpope/vim-rails'
   " Plug 'tpope/vim-cucumber'
@@ -303,11 +304,11 @@ vnoremap ;; <esc>
 
 nnoremap mm :/mod<cr> 
 "Ag search
-nnoremap <leader>f :Ag! <C-R><C-W> app/<cr>
-nnoremap <leader>F :Ag! <C-R><C-W><cr>
+nnoremap <leader>f :Ag! --ignore '*.sql' <C-R><C-W> app/<cr>
+nnoremap <leader>F :Ag! --ignore '*.sql' <C-R><C-W><cr>
 " case insensitive searching
-nnoremap <leader>fi :Ag! -i <C-R><C-W> app/<cr>
-nnoremap <leader>Fi :Ag! -i <C-R><C-W><cr>
+nnoremap <leader>fi :Ag! -i --ignore '*.sql' <C-R><C-W> app/<cr>
+nnoremap <leader>Fi :Ag! -i --ignore '*.sql' <C-R><C-W><cr>
 
 
 " PLUGINS STUFF
@@ -379,8 +380,8 @@ set nowrapscan
 set number
 set expandtab
 set smarttab
-set tabstop=4
-set shiftwidth=4 " # of space when > in visual mode, should be same as ts
+set tabstop=2
+set shiftwidth=2 " # of space when press > in visual mode, should be same as ts
 
 set nohlsearch "disable search highlight
 set incsearch
