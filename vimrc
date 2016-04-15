@@ -87,7 +87,7 @@ call plug#end()
 let mapleader=","
 filetype indent on
 
-
+set encoding=utf-8  " so NerdTree arrows display correctly
 set diffopt=vertical
 set clipboard=unnamed
 
