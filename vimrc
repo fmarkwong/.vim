@@ -84,6 +84,11 @@ call plug#end()
 " let g:seoul256_background = 233
 " colo seoul25
 
+"abbreviations
+
+" abbreviate pre 'page1preowned@gmail.com'
+iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
+
 let mapleader=","
 filetype indent on
 
@@ -432,3 +437,11 @@ function! QuickfixToggle()
        let g:quickfix_is_open = 1
    endif
 endfunction
+
+http://stackoverflow.com/questions/11858927/preventing-trailing-whitespace-when-using-vim-abbreviations
+func Eatchar(pat)
+  let c = nr2char(getchar(0))
+  return (c =~ a:pat) ? '' : c
+endfunc
+iabbr <silent> if if ()<Left><C-R>=Eatchar('\s')<CR>
+
