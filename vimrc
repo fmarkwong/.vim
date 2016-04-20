@@ -34,7 +34,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " disable parallel installation of plugins
-let g:plug_threads = 1
+"let g:plug_threads = 1
 
 call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
@@ -84,10 +84,15 @@ call plug#end()
 " let g:seoul256_background = 233
 " colo seoul25
 
+"abbreviations
+
+" abbreviate pre 'page1preowned@gmail.com'
+iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
+
 let mapleader=","
 filetype indent on
 
-
+set encoding=utf-8  " so NerdTree arrows display correctly
 set diffopt=vertical
 set clipboard=unnamed
 
@@ -432,3 +437,11 @@ function! QuickfixToggle()
        let g:quickfix_is_open = 1
    endif
 endfunction
+
+http://stackoverflow.com/questions/11858927/preventing-trailing-whitespace-when-using-vim-abbreviations
+func Eatchar(pat)
+  let c = nr2char(getchar(0))
+  return (c =~ a:pat) ? '' : c
+endfunc
+iabbr <silent> if if ()<Left><C-R>=Eatchar('\s')<CR>
+
