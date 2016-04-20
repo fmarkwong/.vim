@@ -380,8 +380,8 @@ set nowrapscan
 set number
 set expandtab
 set smarttab
-set tabstop=2
-set shiftwidth=2 " # of space when press > in visual mode, should be same as ts
+set tabstop=4
+set shiftwidth=4 " # of space when press > in visual mode, should be same as ts
 
 set nohlsearch "disable search highlight
 set incsearch
