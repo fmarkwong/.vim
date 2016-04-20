@@ -438,7 +438,7 @@ function! QuickfixToggle()
    endif
 endfunction
 
-http://stackoverflow.com/questions/11858927/preventing-trailing-whitespace-when-using-vim-abbreviations
+"http://stackoverflow.com/questions/11858927/preventing-trailing-whitespace-when-using-vim-abbreviations
 func Eatchar(pat)
   let c = nr2char(getchar(0))
   return (c =~ a:pat) ? '' : c
