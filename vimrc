@@ -37,6 +37,7 @@ endif
 "let g:plug_threads = 1
 
 call plug#begin('~/.vim/plugged')
+  Plug 'chrisbra/csv.vim'
   Plug 'Raimondi/delimitMate'
   Plug 'captbaritone/better-indent-support-for-php-with-html'
   Plug 'tell-k/vim-browsereload-mac'
