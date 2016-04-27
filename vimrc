@@ -311,10 +311,10 @@ vnoremap ;; <esc>
 
 nnoremap mm :/mod<cr> 
 "Ag search
-nnoremap <leader>f :Ag! --ignore '*.sql' <C-R><C-W> app/<cr>
+nnoremap <leader>f :Ag! --ignore '*.sql' <C-R><C-W> apps/<cr>
 nnoremap <leader>F :Ag! --ignore '*.sql' <C-R><C-W><cr>
 " case insensitive searching
-nnoremap <leader>fi :Ag! -i --ignore '*.sql' <C-R><C-W> app/<cr>
+nnoremap <leader>fi :Ag! -i --ignore '*.sql' <C-R><C-W> apps/<cr>
 nnoremap <leader>Fi :Ag! -i --ignore '*.sql' <C-R><C-W><cr>
 
 
