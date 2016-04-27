@@ -88,6 +88,7 @@ call plug#end()
 
 " abbreviate pre 'page1preowned@gmail.com'
 iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
+iabbr <silent> car 13806 Hwy 99 Lynnwood, WA 98087<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
 let mapleader=","
 filetype indent on
@@ -438,7 +439,7 @@ function! QuickfixToggle()
    endif
 endfunction
 
-"http://stackoverflow.com/questions/11858927/preventing-trailing-whitespace-when-using-vim-abbreviations
+" http://stackoverflow.com/questions/11858927/preventing-trailing-whitespace-when-using-vim-abbreviations
 func Eatchar(pat)
   let c = nr2char(getchar(0))
   return (c =~ a:pat) ? '' : c
