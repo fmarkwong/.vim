@@ -67,7 +67,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'stephpy/vim-php-cs-fixer'
   Plug 'craigemery/vim-autotag'
   " Plug '2072/PHP-Indenting-for-VIm'
-  " Plug 'phpfmt/vim-phpfmt'
+  Plug 'phpfmt/vim-phpfmt'
   " Plug 'joonty/vim-phpqa'
   Plug 'scrooloose/syntastic'
   Plug 'tpope/vim-endwise'
@@ -81,7 +81,6 @@ call plug#end()
 " Range:   233 (darkest) ~ 239 (lightest)
 " Default: 237
 
-
 " let g:seoul256_background = 233
 " colo seoul25
 
@@ -89,7 +88,6 @@ call plug#end()
 
 " abbreviate pre 'page1preowned@gmail.com'
 iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
-iabbr <silent> car 13806 Hwy 99 Lynnwood, WA 98087<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
 let mapleader=","
 filetype indent on
@@ -129,6 +127,7 @@ let g:returnApp = 'iTerm' " refocus back to iTerm after reload
 set backspace=2
 let delimitMate_expand_cr = 2
 
+let PHP_removeCRwhenUnix = 1 " remove '\r' from newlines as per :help php-indent
 " PHPQa
 " let g:phpqa_codesniffer_cmd='$HOME/Development/zidisha_dev/zidisha2/vendor/bin/phpcs'
 " let g:phpqa_messdetector_cmd='$HOME/Development/zidisha_dev/zidisha2/vendor/bin/phpmd'
@@ -140,10 +139,11 @@ let delimitMate_expand_cr = 2
 " let g:php_cs_fixer_path = '$HOME/zidisha2/vendor/bin/php-cs-fixer'
 let g:php_cs_fixer_level = "psr2"
 let g:php_cs_fixer_fixers_list = 'phpdoc_params,align_double_arrow,align_equals,no_blank_lines_before_namespace'
-nnoremap <silent><leader>fi :call PhpCsFixerFixFile()<CR>
+" nnoremap <silent><leader>fi :call PhpCsFixerFixFile()<CR>
 
 
-
+let g:phpfmt_on_save = 0
+nnoremap <silent><leader>fi :call PhpFmtFixFile()<CR>:call PhpCsFixerFixFile()<CR>
 
 " Toggle Tagbar
 " nmap <leader>t :TagbarOpenAutoClose<CR>
@@ -314,8 +314,8 @@ nnoremap mm :/mod<cr>
 nnoremap <leader>f :Ag! --ignore '*.sql' <C-R><C-W> apps/<cr>
 nnoremap <leader>F :Ag! --ignore '*.sql' <C-R><C-W><cr>
 " case insensitive searching
-nnoremap <leader>fi :Ag! -i --ignore '*.sql' <C-R><C-W> apps/<cr>
-nnoremap <leader>Fi :Ag! -i --ignore '*.sql' <C-R><C-W><cr>
+" nnoremap <leader>fi :Ag! -i --ignore '*.sql' <C-R><C-W> apps/<cr>
+" nnoremap <leader>Fi :Ag! -i --ignore '*.sql' <C-R><C-W><cr>
 
 
 " PLUGINS STUFF
@@ -441,7 +441,7 @@ function! QuickfixToggle()
 endfunction
 
 " http://stackoverflow.com/questions/11858927/preventing-trailing-whitespace-when-using-vim-abbreviations
-func Eatchar(pat)
+function! Eatchar(pat)
   let c = nr2char(getchar(0))
   return (c =~ a:pat) ? '' : c
 endfunc
