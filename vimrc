@@ -143,7 +143,7 @@ let g:php_cs_fixer_fixers_list = 'phpdoc_params,align_double_arrow,align_equals,
 
 
 let g:phpfmt_on_save = 0
-let g:phpfmt_update_on_open = 0
+let g:phpfmt_update_on_open = 0 " don't update on open for now 04/28/16 because the newest .vim/plugged/vim-phpfmt/plugin/fmt.phar is broken
 let g:phpfmt_psr2 = 1
 let g:phpfmt_enable_default_mapping = 0
 nnoremap <silent><leader>h :call PhpFmtFixFile()<CR>:call PhpCsFixerFixFile()<CR>
