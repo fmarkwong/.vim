@@ -143,7 +143,10 @@ let g:php_cs_fixer_fixers_list = 'phpdoc_params,align_double_arrow,align_equals,
 
 
 let g:phpfmt_on_save = 0
-nnoremap <silent><leader>fi :call PhpFmtFixFile()<CR>:call PhpCsFixerFixFile()<CR>
+let g:phpfmt_update_on_open = 0
+let g:phpfmt_psr2 = 1
+let g:phpfmt_enable_default_mapping = 0
+nnoremap <silent><leader>h :call PhpFmtFixFile()<CR>:call PhpCsFixerFixFile()<CR>
 
 " Toggle Tagbar
 " nmap <leader>t :TagbarOpenAutoClose<CR>
