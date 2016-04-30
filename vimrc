@@ -37,6 +37,8 @@ endif
 "let g:plug_threads = 1
 
 call plug#begin('~/.vim/plugged')
+  Plug 'ervandew/supertab'
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'chrisbra/csv.vim'
   Plug 'Raimondi/delimitMate'
   Plug 'captbaritone/better-indent-support-for-php-with-html'
@@ -166,6 +168,13 @@ let g:tagbar_type_php = {
     \ ],
 \ }
 
+" open definition in new window
+map <C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+" http://vim.wikia.com/wiki/Open_file_under_cursor
+" map <C-W><C-F> :vertical wincmd f<CR> "opens in verticle split
+nnoremap <C-W><C-F> <C-W>vgf
+
 " need to go into this file and change ip address to match host machine(OS X),
 " it changes often. Or else debugger won't work
 " sudo vim /etc/php5/cli/conf.d/20-xdebug.ini
@@ -181,19 +190,29 @@ let g:vdebug_options = {
 let g:pdv_template_dir = $HOME . "/.vim/plugged/pdv/templates_snip"
 nnoremap <leader>d :call pdv#DocumentWithSnip()<CR>
 
-" Ultisnips
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+" https://www.reddit.com/r/vim/comments/2sx567/snipmate_and_youcompleteme_doesnt_work_well/
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+
+"ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " nnoremap <tab> :call UltiSnips#ExpandSnippetOrJump()<CR> 
 " nnoremap <D-tab> :call UltiSnips#JumpBackwards()<CR> 
 
+
+
 " open current file in MacVim
 nnoremap <leader>m :execute "! mvim +" . line(".") " -R %"<CR>  
 " toggle pastemode
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
+" nnoremap <F2> :set invpaste paste?<CR>
+" set pastetoggle=<F2>
+" set showmode
 
 nnoremap <leader>p :set invpaste paste?<CR>
 set pastetoggle=<leader>p
@@ -263,9 +282,9 @@ nmap <leader>s :source $MYVIMRC<CR>
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/"<CR>
 
 " Obsession, restore session
-nnoremap <leader>rh :source $HOME/.vim/sessions/homestead.vim<CR>
-nnoremap <leader>re :source $HOME/.vim/sessions/editor.vim<CR>
-nnoremap <leader>rz :source $HOME/.vim/sessions/zidisha.vim<CR>
+" nnoremap <leader>rh :source $HOME/.vim/sessions/homestead.vim<CR>
+" nnoremap <leader>re :source $HOME/.vim/sessions/editor.vim<CR>
+" nnoremap <leader>rz :source $HOME/.vim/sessions/zidisha.vim<CR>
 
 " fuzzyfinder keybindings
 "nnoremap <leader>y :FufFile<CR>
