@@ -179,9 +179,17 @@ nnoremap <C-W><C-F> <C-W>vgf
 " it changes often. Or else debugger won't work
 " sudo vim /etc/php5/cli/conf.d/20-xdebug.ini
 " sudo vim /etc/php5/fpm/conf.d/20-xdebug.ini
+" zend_extension=xdebug.so
+" xdebug.remote_enable = 1
+" xdebug.remote_connect_back = 1
+" xdebug.max_nesting_level = 512
+" xdebug.remote_autostart = On
+" xdebug.remote_host = 192.168.1.2
+" xdebug.remote_port = 10000
 let g:vdebug_options = {
 \ 'path_maps': {"/home/vagrant/zidisha2": "/Users/mark/Development/zidisha_dev/zidisha2",
-\               "/home/vagrant/projects": "/Users/mark/Development/homestead"},
+\               "/home/vagrant/projects": "/Users/mark/Development/homestead",
+\               "/var/www": "/Users/mark/Development/hadron-lamp/webroot"},
 \ 'port': 10000,
 \ 'break_on_open': 0
 \}
@@ -284,6 +292,7 @@ nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/"<CR>
 " Obsession, restore session
 " nnoremap <leader>rh :source $HOME/.vim/sessions/homestead.vim<CR>
 " nnoremap <leader>re :source $HOME/.vim/sessions/editor.vim<CR>
+nnoremap <leader>r :source $HOME/.vim/sessions/editor.vim<CR>
 " nnoremap <leader>rz :source $HOME/.vim/sessions/zidisha.vim<CR>
 
 " fuzzyfinder keybindings
