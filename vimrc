@@ -92,7 +92,7 @@ call plug#end()
 iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
 let mapleader=","
-filetype indent on
+filetype plugin indent on
 
 set encoding=utf-8  " so NerdTree arrows display correctly
 set diffopt=vertical
@@ -217,11 +217,9 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " open current file in MacVim
 nnoremap <leader>m :execute "! mvim +" . line(".") " -R %"<CR>  
-" toggle pastemode
-" nnoremap <F2> :set invpaste paste?<CR>
-" set pastetoggle=<F2>
-" set showmode
 
+" toggle paste mode
+" http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
 nnoremap <leader>p :set invpaste paste?<CR>
 set pastetoggle=<leader>p
 set showmode
@@ -418,17 +416,20 @@ set nowrapscan
 set number
 set expandtab
 set smarttab
-set tabstop=4
-set shiftwidth=4 " # of space when press > in visual mode, should be same as ts
+
+set tabstop=2
+set shiftwidth=2 " # of space when press > in visual mode, should be same as ts
+" https://stackoverflow.com/questions/158968/changing-vim-indentation-behavior-by-file-type
+autocmd FileType php setlocal shiftwidth=4 tabstop=4
 
 set nohlsearch "disable search highlight
 set incsearch
 set laststatus=2 " option 2, always display status line (displays filename)
 syntax on         " turn of syntax highlighting
 set smartindent
-filetype plugin on
+" filetype plugin on
 set omnifunc=syntaxcomplete#Complete
-filetype plugin indent on
+" filetype plugin indent on
 
 
 map <Leader>j :%!python -m json.tool<CR>
