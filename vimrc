@@ -36,10 +36,10 @@ endif
 " disable parallel installation of plugins
 "let g:plug_threads = 1
 
+" When making changes, remember to source $VIMRC before PlugInstall/Update
 call plug#begin('~/.vim/plugged')
   Plug 'ervandew/supertab'
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-  Plug 'chrisbra/csv.vim'
   Plug 'Raimondi/delimitMate'
   Plug 'tell-k/vim-browsereload-mac'
   Plug 'Chiel92/vim-autoformat'
@@ -52,26 +52,35 @@ call plug#begin('~/.vim/plugged')
   Plug 'bling/vim-airline'
   Plug 'rking/ag.vim'
   Plug 'vim-scripts/greplace.vim'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-obsession'
-  Plug 'tpope/vim-repeat'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'tomtom/tcomment_vim'
-  Plug 'tpope/vim-ragtag'
-  Plug 'tpope/vim-surround'
   Plug 'majutsushi/tagbar'
   Plug 'airblade/vim-gitgutter'
   Plug 'tobyS/pdv' | Plug 'tobyS/vmustache'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'frozen': 1 }
   Plug 'craigemery/vim-autotag'
   Plug 'scrooloose/syntastic'
+
+  Plug 'tpope/vim-ragtag'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-obsession'
+  Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-cucumber'
+  Plug 'vim-ruby/vim-ruby'
+
+  " Look into these tags
+  " easy tag:
+  " https://stackoverflow.com/questions/26914063/migrating-to-vim-from-rubymine-interpreted-auto-completion
+
+  " Not using
+  " Plug 'chrisbra/csv.vim'
   " Plug 'szw/vim-maximizer'
-  " Plug 'tpope/vim-rails'
-  " Plug 'tpope/vim-cucumber'
   " Plug 'syntastic/syntax_checkers/ruby/rubylint.vim'
-  "
+
   " PHP Plugins
   " Plug 'captbaritone/better-indent-support-for-php-with-html'
   " Plug 'vim-php/tagbar-phpctags.vim'
@@ -430,10 +439,10 @@ set laststatus=2 " option 2, always display status line (displays filename)
 syntax on         " turn of syntax highlighting
 set smartindent
 " filetype plugin on
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete " don't we need this since we have YouComplete me
 " filetype plugin indent on
 
-
+" format current json file
 map <Leader>j :%!python -m json.tool<CR>
 autocmd BufNewFile,BufRead *.json set ft=javascript
 
@@ -479,5 +488,3 @@ function! Eatchar(pat)
   let c = nr2char(getchar(0))
   return (c =~ a:pat) ? '' : c
 endfunc
-iabbr <silent> if if ()<Left><C-R>=Eatchar('\s')<CR>
-
