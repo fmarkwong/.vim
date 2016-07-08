@@ -41,7 +41,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'chrisbra/csv.vim'
   Plug 'Raimondi/delimitMate'
-  Plug 'captbaritone/better-indent-support-for-php-with-html'
   Plug 'tell-k/vim-browsereload-mac'
   Plug 'Chiel92/vim-autoformat'
   Plug 'joonty/vdebug'
@@ -62,21 +61,24 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-surround'
   Plug 'majutsushi/tagbar'
-  Plug 'vim-php/tagbar-phpctags.vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'tobyS/pdv' | Plug 'tobyS/vmustache'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'frozen': 1 }
-  Plug 'stephpy/vim-php-cs-fixer'
   Plug 'craigemery/vim-autotag'
-  " Plug '2072/PHP-Indenting-for-VIm'
-  Plug 'phpfmt/vim-phpfmt'
-  " Plug 'joonty/vim-phpqa'
   Plug 'scrooloose/syntastic'
   Plug 'tpope/vim-endwise'
   " Plug 'szw/vim-maximizer'
   " Plug 'tpope/vim-rails'
   " Plug 'tpope/vim-cucumber'
   " Plug 'syntastic/syntax_checkers/ruby/rubylint.vim'
+  "
+  " PHP Plugins
+  " Plug 'captbaritone/better-indent-support-for-php-with-html'
+  " Plug 'vim-php/tagbar-phpctags.vim'
+  " Plug 'stephpy/vim-php-cs-fixer'
+  " Plug 'phpfmt/vim-phpfmt'
+  " " Plug 'joonty/vim-phpqa'
+  " " Plug '2072/PHP-Indenting-for-VIm'
 call plug#end()
 
 " seoul256 (dark):
