@@ -38,6 +38,7 @@ endif
 
 " When making changes, remember to source $VIMRC before PlugInstall/Update
 call plug#begin('~/.vim/plugged')
+  Plug 'gioele/vim-autoswap'
   Plug 'ervandew/supertab'
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'Raimondi/delimitMate'
@@ -72,9 +73,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-cucumber'
   Plug 'vim-ruby/vim-ruby'
 
-  " Look into these tags
-  " easy tag:
-  " https://stackoverflow.com/questions/26914063/migrating-to-vim-from-rubymine-interpreted-auto-completion
+  " plugins to consider 
+  " https://mattn.github.io/emmet-vim/
+  " https://github.com/JoshCheek/seeing_is_believing
+  " easy tag: https://stackoverflow.com/questions/26914063/migrating-to-vim-from-rubymine-interpreted-auto-completion
+  " http://aftnn.org/post/75730734352/vim-auto-closers-compared
+  " http://blog.mikecordell.com/2015/01/27/better-fuzzy-search-with-ctrl-p-in-vim.html
 
   " Not using
   " Plug 'chrisbra/csv.vim'
@@ -100,7 +104,7 @@ call plug#end()
 "abbreviations
 
 " abbreviate pre 'page1preowned@gmail.com'
-iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
+" iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
 let mapleader=","
 filetype plugin indent on
@@ -247,6 +251,15 @@ set grepprg=ag\ --nogroup\ --nocolor
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" http://softwareas.com/a-simple-way-to-speed-up-vim-ctrl-p-plugin-delegate-to-ag/
+" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+"       \ --ignore .git
+"       \ --ignore .svn
+"       \ --ignore .hg
+"       \ --ignore .DS_Store
+"       \ --ignore "**/*.pyc"
+"       \ -g ""'
+
 
 " ag is fast enough that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0
