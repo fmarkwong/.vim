@@ -38,6 +38,7 @@ endif
 
 " When making changes, remember to source $VIMRC before PlugInstall/Update
 call plug#begin('~/.vim/plugged')
+  Plug 'tpope/vim-eunuch'
   Plug 'gioele/vim-autoswap'
   Plug 'ervandew/supertab'
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
@@ -204,7 +205,8 @@ nnoremap <C-W><C-F> <C-W>vgf
 let g:vdebug_options = {
 \ 'path_maps': {"/home/vagrant/zidisha2": "/Users/mark/Development/zidisha_dev/zidisha2",
 \               "/home/vagrant/projects": "/Users/mark/Development/homestead",
-\               "/var/www": "/Users/mark/Development/hadron-lamp/webroot"},
+\               "/var/www": "/Users/mark/Development/hadron-lamp/webroot",
+\               "/var/www/public": "/Users/mark/Development/scotch-box/public" },
 \ 'port': 10000,
 \ 'break_on_open': 0
 \}
