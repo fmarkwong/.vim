@@ -357,11 +357,11 @@ inoremap <silent> <C-s> <esc>:write<CR>
 inoremap ;; <esc>
 inoremap kk <esc>
 inoremap jj <esc>
-inoremap ii <esc>
+" inoremap ii <esc>
 cnoremap ;; <esc>
 cnoremap kk <esc>
 cnoremap jj <esc>
-cnoremap ii <esc>
+"cnoremap ii <esc>
 " don't map kk and jj in visual mode because need direction keys in this mode
 vnoremap ;; <esc>
 
