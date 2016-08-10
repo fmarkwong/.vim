@@ -254,6 +254,7 @@ set grepprg=ag\ --nogroup\ --nocolor
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " http://softwareas.com/a-simple-way-to-speed-up-vim-ctrl-p-plugin-delegate-to-ag/
+" https://stackoverflow.com/questions/18285751/use-ag-in-ctrlp-vim
 " let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 "       \ --ignore .git
 "       \ --ignore .svn
