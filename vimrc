@@ -104,8 +104,10 @@ call plug#end()
 
 "abbreviations
 
-" abbreviate pre 'page1preowned@gmail.com'
+" example usage to make abbreviation pre 'page1preowned@gmail.com'
 " iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
+
+iabbr <silent> de eval(\Psy\sh());<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
 let mapleader=","
 filetype plugin indent on
@@ -202,14 +204,23 @@ nnoremap <C-W><C-F> <C-W>vgf
 " xdebug.remote_autostart = On
 " xdebug.remote_host = 192.168.1.2
 " xdebug.remote_port = 10000
+"
+" for remote only (e.g. running php on vm)
+" let g:vdebug_options = {
+" \ 'path_maps': {"/home/vagrant/zidisha2": "/Users/mark/Development/zidisha_dev/zidisha2",
+" \               "/home/vagrant/projects": "/Users/mark/Development/homestead",
+" \               "/var/www": "/Users/mark/Development/hadron-lamp/webroot",
+" \               "/vagrant/src": "/Users/mark/Development/work/vagrant-lamp/webroot",
+" \               "/var/www/public": "/Users/mark/Development/scotch-box/public" },
+" \ 'port': 10000,
+" \ 'break_on_open': 0
+" \}
+
 let g:vdebug_options = {
-\ 'path_maps': {"/home/vagrant/zidisha2": "/Users/mark/Development/zidisha_dev/zidisha2",
-\               "/home/vagrant/projects": "/Users/mark/Development/homestead",
-\               "/var/www": "/Users/mark/Development/hadron-lamp/webroot",
-\               "/var/www/public": "/Users/mark/Development/scotch-box/public" },
 \ 'port': 10000,
 \ 'break_on_open': 0
 \}
+
 
 " PHP documentor
 let g:pdv_template_dir = $HOME . "/.vim/plugged/pdv/templates_snip"
