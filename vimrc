@@ -459,6 +459,7 @@ set tabstop=2
 set shiftwidth=2 " # of space when press > in visual mode, should be same as ts
 " https://stackoverflow.com/questions/158968/changing-vim-indentation-behavior-by-file-type
 autocmd FileType php setlocal shiftwidth=4 tabstop=4
+autocmd FileType yaml setlocal shiftwidth=4 tabstop=4
 
 set nohlsearch "disable search highlight
 set incsearch
@@ -515,3 +516,12 @@ function! Eatchar(pat)
   let c = nr2char(getchar(0))
   return (c =~ a:pat) ? '' : c
 endfunc
+
+" https://stackoverflow.com/questions/9160570/append-or-prepend-selected-text-to-a-file-in-vim
+com! -nargs=1 -range Sbak call MoveSelectedLinesToFile(<f-args>)
+fun! MoveSelectedLinesToFile(filename)
+    exec "silent! '<,'>w! >>" . a:filename
+    " norm gvd
+endfunc
+
+map <leader>c :Sbak /Users/mark/Library/Mobile\ Documents/com~apple~CloudDocs/work/zidisha/session_notes.txt<cr>
