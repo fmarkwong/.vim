@@ -108,6 +108,8 @@ call plug#end()
 " iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
 iabbr <silent> de eval(\Psy\sh());<c-r>=Eatchar('\m\s\<bar>/')<cr>
+iabbr <silent> yt Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
+iabbr <silent> ytp <?= Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
 let mapleader=","
 filetype plugin indent on
@@ -525,3 +527,9 @@ fun! MoveSelectedLinesToFile(filename)
 endfunc
 
 map <leader>c :Sbak /Users/mark/Library/Mobile\ Documents/com~apple~CloudDocs/work/zidisha/session_notes.txt<cr>
+
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
