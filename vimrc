@@ -463,6 +463,9 @@ set shiftwidth=2 " # of space when press > in visual mode, should be same as ts
 autocmd FileType php setlocal shiftwidth=4 tabstop=4
 autocmd FileType yaml setlocal shiftwidth=4 tabstop=4
 
+" https://stackoverflow.com/questions/11666170/vim-persistent-set-syntax-for-a-given-filetype
+autocmd BufNewFile,BufRead *.js.php set filetype=javascript
+
 set nohlsearch "disable search highlight
 set incsearch
 set laststatus=2 " option 2, always display status line (displays filename)
@@ -533,3 +536,10 @@ map <leader>c :Sbak /Users/mark/Library/Mobile\ Documents/com~apple~CloudDocs/wo
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+"NOTES
+" for PHP/HTML syntax: http://vim.wikia.com/wiki/Forcing_Syntax_Coloring_for_files_with_odd_extensions
+" let php_minlines=500
+
+" https://stackoverflow.com/questions/9092347/how-to-make-vim-use-the-same-environment-as-my-login-shell-when-running-commands
+set shell=bash\ --login
