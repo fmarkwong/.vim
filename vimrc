@@ -261,24 +261,29 @@ set showmode
 "Greplace - use ag instead of grep
 " http://robots.thoughtbot.com/faster-grepping-in-vim
 if executable('ag')
-" Use ag over grep
-set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
 
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" http://softwareas.com/a-simple-way-to-speed-up-vim-ctrl-p-plugin-delegate-to-ag/
-" https://stackoverflow.com/questions/18285751/use-ag-in-ctrlp-vim
-" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-"       \ --ignore .git
-"       \ --ignore .svn
-"       \ --ignore .hg
-"       \ --ignore .DS_Store
-"       \ --ignore "**/*.pyc"
-"       \ -g ""'
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " http://softwareas.com/a-simple-way-to-speed-up-vim-ctrl-p-plugin-delegate-to-ag/
+  " https://stackoverflow.com/questions/18285751/use-ag-in-ctrlp-vim
+  " let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+  "       \ --ignore .git
+  "       \ --ignore .svn
+  "       \ --ignore .hg
+  "       \ --ignore .DS_Store
+  "       \ --ignore "**/*.pyc"
+  "       \ -g ""'
 
 
-" ag is fast enough that CtrlP doesn't need to cache
-let g:ctrlp_use_caching = 0
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+else
+  " https://medium.com/a-tiny-piece-of-vim/making-ctrlp-vim-load-100x-faster-7a722fae7df6#.yz8xn8q4v
+  " https://github.com/kien/ctrlp.vim/issues/273
+  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 endif
 
 "Syntastic
