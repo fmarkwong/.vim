@@ -89,7 +89,7 @@ call plug#begin('~/.vim/plugged')
   " PHP Plugins
   " Plug 'captbaritone/better-indent-support-for-php-with-html'
   " Plug 'vim-php/tagbar-phpctags.vim'
-  " Plug 'stephpy/vim-php-cs-fixer'
+  Plug 'stephpy/vim-php-cs-fixer'
   " Plug 'phpfmt/vim-phpfmt'
   " " Plug 'joonty/vim-phpqa'
   " " Plug '2072/PHP-Indenting-for-VIm'
@@ -158,10 +158,10 @@ let PHP_removeCRwhenUnix = 1 " remove '\r' from newlines as per :help php-indent
 " let g:phpqa_open_loc = 1
 
 "PHP-cs-fixer
-" let g:php_cs_fixer_path = '$HOME/zidisha2/vendor/bin/php-cs-fixer'
+let g:php_cs_fixer_path = '$HOME/bin/php-cs-fixer'
 let g:php_cs_fixer_level = "psr2"
 let g:php_cs_fixer_fixers_list = 'phpdoc_params,align_double_arrow,align_equals,no_blank_lines_before_namespace'
-" nnoremap <silent><leader>fi :call PhpCsFixerFixFile()<CR>
+nnoremap <silent><leader>fi :call PhpCsFixerFixFile()<CR>
 
 
 let g:phpfmt_on_save = 0
