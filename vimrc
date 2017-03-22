@@ -280,10 +280,13 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 else
-  " https://medium.com/a-tiny-piece-of-vim/making-ctrlp-vim-load-100x-faster-7a722fae7df6#.yz8xn8q4v
-  " https://github.com/kien/ctrlp.vim/issues/273
-  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
+  " https://github.com/junegunn/vim-plug/issues/380
+  let g:ctrlp_user_command = {
+      \ 'types': {
+        \ 1: ['.git', 'cd %s && git ls-files . --cached --others --exclude-standard'],
+        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+      \ }
+  \ }
 endif
 
 "Syntastic
