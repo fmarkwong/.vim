@@ -60,7 +60,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'majutsushi/tagbar'
   Plug 'airblade/vim-gitgutter'
   Plug 'tobyS/pdv' | Plug 'tobyS/vmustache'
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'frozen': 1 }
+  " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'frozen': 1 }
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'craigemery/vim-autotag'
   Plug 'scrooloose/syntastic'
 
@@ -75,6 +76,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-ruby/vim-ruby'
 
   " plugins to consider 
+  " Plug 'dhruvasagar/vim-dotoo'
   " https://mattn.github.io/emmet-vim/
   " https://github.com/JoshCheek/seeing_is_believing
   " easy tag: https://stackoverflow.com/questions/26914063/migrating-to-vim-from-rubymine-interpreted-auto-completion
@@ -107,6 +109,8 @@ call plug#end()
 " example usage to make abbreviation pre 'page1preowned@gmail.com'
 " iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
+" can also be \Psy\Shell::debug();
+" iabbr <silent> de \Psy\Shell::debug();<c-r>=Eatchar('\m\s\<bar>/')<cr>
 iabbr <silent> de eval(\Psy\sh());<c-r>=Eatchar('\m\s\<bar>/')<cr>
 iabbr <silent> yt Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
 iabbr <silent> ytp <?= Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
@@ -189,6 +193,7 @@ let g:tagbar_type_php = {
 \ }
 
 " open definition in new window
+" to make tags:  ctags -R .
 map <C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " http://vim.wikia.com/wiki/Open_file_under_cursor
@@ -278,7 +283,7 @@ if executable('ag')
 
 
   " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  " let g:ctrlp_use_caching = 0
 else
   " https://github.com/junegunn/vim-plug/issues/380
   let g:ctrlp_user_command = {
