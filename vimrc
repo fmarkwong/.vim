@@ -74,6 +74,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-cucumber'
   Plug 'vim-ruby/vim-ruby'
+  Plug 'pangloss/vim-javascript'
 
   " plugins to consider 
   " Plug 'dhruvasagar/vim-dotoo'
@@ -109,11 +110,14 @@ call plug#end()
 " example usage to make abbreviation pre 'page1preowned@gmail.com'
 " iabbr <silent> pre page1preowned@gmail.com<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
-" can also be \Psy\Shell::debug();
+" \Psy\Shell::debug(); does not work!
 " iabbr <silent> de \Psy\Shell::debug();<c-r>=Eatchar('\m\s\<bar>/')<cr>
 iabbr <silent> de eval(\Psy\sh());<c-r>=Eatchar('\m\s\<bar>/')<cr>
 iabbr <silent> yt Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
 iabbr <silent> ytp <?= Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
+
+" https://stackoverflow.com/questions/6980749/simpler-way-to-put-pdb-breakpoints-in-python-code
+au FileType python map <silent> <leader>b oimport pdb; pdb.set_trace()<esc>
 
 let mapleader=","
 filetype plugin indent on
@@ -235,6 +239,7 @@ nnoremap <leader>d :call pdv#DocumentWithSnip()<CR>
 
 " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
 " https://www.reddit.com/r/vim/comments/2sx567/snipmate_and_youcompleteme_doesnt_work_well/
+" (via http://stackoverflow.com/a/22253548/1626737)
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 
@@ -249,6 +254,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " nnoremap <D-tab> :call UltiSnips#JumpBackwards()<CR> 
 
 
+nnoremap <leader>o :cd /Users/mark/Library/Mobile Documents/com~apple~CloudDocs/3notes<CR>  
 
 " open current file in MacVim
 nnoremap <leader>m :execute "! mvim +" . line(".") " -R %"<CR>  
@@ -341,6 +347,7 @@ nmap <leader>s :source $MYVIMRC<CR>
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/"<CR>
 
 " Obsession, restore session
+" to save a session  :mksession $HOME/.vim/sessions/editor.vim
 " nnoremap <leader>rh :source $HOME/.vim/sessions/homestead.vim<CR>
 " nnoremap <leader>re :source $HOME/.vim/sessions/editor.vim<CR>
 nnoremap <leader>r :source $HOME/.vim/sessions/editor.vim<CR>
@@ -472,12 +479,15 @@ set smarttab
 
 set tabstop=2
 set shiftwidth=2 " # of space when press > in visual mode, should be same as ts
-" https://stackoverflow.com/questions/158968/changing-vim-indentation-behavior-by-file-type
-autocmd FileType php setlocal shiftwidth=4 tabstop=4
-autocmd FileType yaml setlocal shiftwidth=4 tabstop=4
-
+"
 " https://stackoverflow.com/questions/11666170/vim-persistent-set-syntax-for-a-given-filetype
 autocmd BufNewFile,BufRead *.js.php set filetype=javascript
+autocmd BufNewFile,BufRead *.vue set filetype=html
+
+" https://stackoverflow.com/questions/158968/changing-vim-indentation-behavior-by-file-type
+" autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
+autocmd FileType php setlocal shiftwidth=4 tabstop=4
+autocmd FileType swift setlocal shiftwidth=4 tabstop=4
 
 set nohlsearch "disable search highlight
 set incsearch
