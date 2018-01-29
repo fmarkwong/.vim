@@ -276,7 +276,20 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  "
+" https://superuser.com/questions/649714/can-i-get-the-vim-ctrlp-plugin-to-ignore-a-specific-folder-in-one-project
+" let g:ctrlp_user_command = 'find %s -type f | grep -v "`cat .ctrlpignore`"'
+
+" https://github.com/kien/ctrlp.vim READ.ME
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+  " ignore stuff in .gitigore: https://medium.com/a-tiny-piece-of-vim/making-ctrlp-vim-load-100x-faster-7a722fae7df6
+  " let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+  " for Python
+  " let g:ctrlp_user_command = [‘.git/’, ‘git ls-files -oc — exclude-standard | grep -Ev “(jpg|png|gif|__init__.py)$”’]
+
   " http://softwareas.com/a-simple-way-to-speed-up-vim-ctrl-p-plugin-delegate-to-ag/
   " https://stackoverflow.com/questions/18285751/use-ag-in-ctrlp-vim
   " let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
@@ -300,6 +313,14 @@ else
   \ }
 endif
 
+" let g:ctrlp_custom_ignore = 'bah\|DS_Store\|git'
+" " https://github.com/kien/ctrlp.vim READ.ME
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"   \ 'file': '\v\.(exe|so|dll)$',
+"   \ 'link': 'some_bad_symbolic_links',
+"   \ }
+"
 "Syntastic
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
