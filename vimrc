@@ -75,6 +75,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-cucumber'
   Plug 'vim-ruby/vim-ruby'
   Plug 'pangloss/vim-javascript'
+  Plug 'mattn/emmet-vim'
 
   " plugins to consider 
   " Plug 'dhruvasagar/vim-dotoo'
@@ -509,6 +510,7 @@ autocmd BufNewFile,BufRead *.vue set filetype=html
 " autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 autocmd FileType php setlocal shiftwidth=4 tabstop=4
 autocmd FileType swift setlocal shiftwidth=4 tabstop=4
+autocmd FileType c setlocal shiftwidth=4 tabstop=4
 
 set nohlsearch "disable search highlight
 set incsearch
