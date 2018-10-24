@@ -19,6 +19,10 @@
 " ln -s source_file destination_file(the link)
 " ln -s ~/.vim/vimrc ~/.vimrc
 " make a symbolic link (~/.vimrc) pointing to ~/.vim/vimrc
+"
+" Tags:  https://andrew.stwrt.ca/posts/vim-ctags/
+" ctags -R .
+"
 " SHORTCUTS
 " ------------------------------------------
 
@@ -38,6 +42,7 @@ endif
 
 " When making changes, remember to source $VIMRC before PlugInstall/Update
 call plug#begin('~/.vim/plugged')
+  Plug 'elixir-editors/vim-elixir'
   Plug 'tpope/vim-eunuch'
   Plug 'gioele/vim-autoswap'
   Plug 'ervandew/supertab'
