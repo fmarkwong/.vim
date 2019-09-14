@@ -46,11 +46,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'gioele/vim-autoswap'
   Plug 'ervandew/supertab'
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer' }
   Plug 'Raimondi/delimitMate'
   Plug 'tell-k/vim-browsereload-mac'
   Plug 'Chiel92/vim-autoformat'
-  Plug 'joonty/vdebug'
+  " Plug 'joonty/vdebug'
   Plug 'sheerun/vim-polyglot'
   Plug 'wesgibbs/vim-irblack'
   Plug 'mileszs/ack.vim'
@@ -79,7 +79,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-cucumber'
   Plug 'vim-ruby/vim-ruby'
-  Plug 'pangloss/vim-javascript'
+  " Plug 'pangloss/vim-javascript'
+  Plug 'neoclide/vim-jsx-improve'
   Plug 'mattn/emmet-vim'
 
   " plugins to consider 
@@ -98,7 +99,7 @@ call plug#begin('~/.vim/plugged')
   " PHP Plugins
   " Plug 'captbaritone/better-indent-support-for-php-with-html'
   " Plug 'vim-php/tagbar-phpctags.vim'
-  Plug 'stephpy/vim-php-cs-fixer'
+  " Plug 'stephpy/vim-php-cs-fixer'
   " Plug 'phpfmt/vim-phpfmt'
   " " Plug 'joonty/vim-phpqa'
   " " Plug '2072/PHP-Indenting-for-VIm'
@@ -110,6 +111,9 @@ call plug#end()
 
 " let g:seoul256_background = 233
 " colo seoul25
+"
+" Set the title of the iterm tab
+set title
 
 "abbreviations
 
@@ -171,6 +175,8 @@ let PHP_removeCRwhenUnix = 1 " remove '\r' from newlines as per :help php-indent
 " let g:phpqa_codesniffer_autorun = 0
 " let g:phpqa_open_loc = 1
 
+let g:tcomment#filetype#guess_typescript = 1
+
 "PHP-cs-fixer
 let g:php_cs_fixer_path = '$HOME/bin/php-cs-fixer'
 let g:php_cs_fixer_level = "psr2"
@@ -202,9 +208,28 @@ let g:tagbar_type_php = {
     \ ],
 \ }
 
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 'functions:functions',
+        \ 'c:callbacks',
+        \ 'd:delegates',
+        \ 'e:exceptions',
+        \ 'i:implementations',
+        \ 'a:macros',
+        \ 'o:operators',
+        \ 'm:modules',
+        \ 'p:protocols',
+        \ 'r:records',
+        \ 't:tests'
+    \ ]
+\ }
 " open definition in new window
 " to make tags:  ctags -R .
 map <C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+autocmd FileType javascript nmap <buffer> <C-]> :YcmCompleter GoTo<CR>
+
 
 " http://vim.wikia.com/wiki/Open_file_under_cursor
 " map <C-W><C-F> :vertical wincmd f<CR> "opens in verticle split
@@ -248,6 +273,30 @@ nnoremap <leader>d :call pdv#DocumentWithSnip()<CR>
 " (via http://stackoverflow.com/a/22253548/1626737)
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:ycm_collect_identifiers_from_tags_files = 0
+let g:ycm_goto_buffer_command = 'split-or-existing-window'
+
+
+" https://stackoverflow.com/questions/38534285/vim-youcompleteme-plugin-opens-up-a-split-window-with-function-definition
+" https://github.com/Valloric/YouCompleteMe#the-gycm_autoclose_preview_window_after_completion-option
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+let g:ycm_semantic_triggers =  {
+  \   'c': ['->', '.'],
+  \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \            're!\[.*\]\s'],
+  \   'ocaml': ['.', '#'],
+  \   'cpp,cuda,objcpp': ['->', '.', '::'],
+  \   'perl': ['->'],
+  \   'php': ['->', '::'],
+  \   'cs,d,elixir,go,groovy,java,javascript,juliaerl6ython,scala,typescript,vb': ['.'],
+  \   'ruby,rust': ['.', '::'],
+  \   'lua': ['.', ':'],
+  \   'erlang': [':'],
+  \ }
+
+" Show type of variable under cursor
+nmap <silent> <leader>gt :YcmCompleter GetType<CR>
 
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
@@ -282,13 +331,13 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   "
 " https://superuser.com/questions/649714/can-i-get-the-vim-ctrlp-plugin-to-ignore-a-specific-folder-in-one-project
 " let g:ctrlp_user_command = 'find %s -type f | grep -v "`cat .ctrlpignore`"'
 
 " https://github.com/kien/ctrlp.vim READ.ME
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+  " let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
   " ignore stuff in .gitigore: https://medium.com/a-tiny-piece-of-vim/making-ctrlp-vim-load-100x-faster-7a722fae7df6
   " let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -321,16 +370,14 @@ endif
 
 " let g:ctrlp_custom_ignore = 'bah\|DS_Store\|git'
 " " https://github.com/kien/ctrlp.vim READ.ME
-" let g:ctrlp_custom_ignore = {
-"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-"   \ 'file': '\v\.(exe|so|dll)$',
-"   \ 'link': 'some_bad_symbolic_links',
-"   \ }
 "
 "Syntastic
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_html_tidy_exec = 'tidy'
+" let g:syntastic_enable_elixir_checker = 1
+" let g:syntastic_elixir_checkers = ['elixir']
+" let g:syntastic_elixir_elixir_args = '+elixirc'
 
 " change cursor shape in different modes for OSX iTerm2
 " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
@@ -341,10 +388,14 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " let g:airline#extensions#default#layout = [ [ 'c', 'b', 'a' ], [ 'x', 'y', 'z', 'warning' ] ]
 " let g:airline#extensions#default#layout = [ [ 'c', 'b'], [ 'x', 'z'] ]
 " let g:airline_section_b = '%{getcwd()}'
-let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#branch#format = 1
+" let g:airline#extensions#branch#displayed_head_limit = 1
 let g:airline_section_t = '%{tagbar#currenttag("[%s] ","")}'
 " let g:airline#extensions#default#layout = [ [ 'c', 'b'], ['z'] ]
-let g:airline#extensions#default#layout = [ [ 'c', 'b'], ['t', 'z'] ]
+" let g:airline#extensions#default#layout = [ [ 'c', 'b'], ['t', 'z'] ]
+" let g:airline#extensions#default#layout = [ [ 'c', 'b'], ['z'] ]
+let g:airline#extensions#default#layout = [ [ 'c', 'b'], ['z'] ]
 " let g:airline#extensions#tagbar#flags = ''
 function! AirlineInit()
 " let g:airline_section_a = airline#section#create(['%f'])
@@ -414,13 +465,15 @@ inoremap <silent> <C-s> <esc>:write<CR>
 
 
 "map escape key
-inoremap ;; <esc>
-inoremap kk <esc>
-inoremap jj <esc>
+" inoremap ;; <esc>
+" inoremap kk <esc>
+" inoremap jj <esc>
+inoremap jk <esc>
 " inoremap ii <esc>
-cnoremap ;; <esc>
-cnoremap kk <esc>
-cnoremap jj <esc>
+" cnoremap ;; <esc>
+" cnoremap kk <esc>
+" cnoremap jj <esc>
+cnoremap jk <esc>
 "cnoremap ii <esc>
 " don't map kk and jj in visual mode because need direction keys in this mode
 vnoremap ;; <esc>
@@ -433,6 +486,9 @@ nnoremap <leader>F :Ag! --ignore '*.sql' <C-R><C-W><cr>
 " nnoremap <leader>fi :Ag! -i --ignore '*.sql' <C-R><C-W> apps/<cr>
 " nnoremap <leader>Fi :Ag! -i --ignore '*.sql' <C-R><C-W><cr>
 
+" https://www.reddit.com/r/vim/comments/5oqu9t/best_way_to_search_all_files_in_current_directory/
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
 
 " PLUGINS STUFF
 " ------------------------------------------
@@ -593,4 +649,18 @@ endif
 " let php_minlines=500
 
 " https://stackoverflow.com/questions/9092347/how-to-make-vim-use-the-same-environment-as-my-login-shell-when-running-commands
-set shell=bash\ --login
+" set shell=bash\ --login  " don't do this, makes git-fugitive slow
+
+
+let g:jsx_ext_required = 0
+let g:javascript_plugin_flow = 1
+let g:flow#autoclose = 1
+
+"Use locally installed flow
+let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
+if matchstr(local_flow, "^\/\\w") == ''
+    let local_flow= getcwd() . "/" . local_flow
+endif
+if executable(local_flow)
+  let g:flow#flowpath = local_flow
+endif
