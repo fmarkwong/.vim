@@ -275,6 +275,7 @@ let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_goto_buffer_command = 'split-or-existing-window'
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
 
 " https://stackoverflow.com/questions/38534285/vim-youcompleteme-plugin-opens-up-a-split-window-with-function-definition
@@ -372,12 +373,26 @@ endif
 " " https://github.com/kien/ctrlp.vim READ.ME
 "
 "Syntastic
-let g:syntastic_check_on_open=1
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_check_on_open=0
 let g:syntastic_enable_signs=1
 let g:syntastic_html_tidy_exec = 'tidy'
-" let g:syntastic_enable_elixir_checker = 1
-" let g:syntastic_elixir_checkers = ['elixir']
-" let g:syntastic_elixir_elixir_args = '+elixirc'
+let g:syntastic_enable_elixir_checker = 1
+let g:syntastic_elixir_checkers = ["elixir"]
+let g:syntastic_elixir_elixir_args = '+elixirc'
+
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["ruby", "php", "javascript"],
+    \ "passive_filetypes": ["elixir"] }
 
 " change cursor shape in different modes for OSX iTerm2
 " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
@@ -531,8 +546,8 @@ let g:gitgutter_eager = 1
 
 nmap <Leader>hr <Plug>GitGutterRevertHunk
 nmap <Leader>hn <Plug>GitGutterNextHunk
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
+" nmap ]c <Plug>GitGutterNextHunk
+" nmap [c <Plug>GitGutterPrevHunk
 
 " GENERAL STUFF
 " -------------------------------------------
