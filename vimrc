@@ -46,11 +46,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'gioele/vim-autoswap'
   Plug 'ervandew/supertab'
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer' }
+  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer' }
   Plug 'Raimondi/delimitMate'
   Plug 'tell-k/vim-browsereload-mac'
   Plug 'Chiel92/vim-autoformat'
-  " Plug 'joonty/vdebug'
+  Plug 'vim-vdebug/vdebug'
   Plug 'sheerun/vim-polyglot'
   Plug 'wesgibbs/vim-irblack'
   Plug 'mileszs/ack.vim'
@@ -66,8 +66,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'tobyS/pdv' | Plug 'tobyS/vmustache'
   " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'frozen': 1 }
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-  Plug 'craigemery/vim-autotag'
+  " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  " Plug 'craigemery/vim-autotag'
   Plug 'scrooloose/syntastic'
 
   Plug 'tpope/vim-ragtag'
@@ -122,9 +122,12 @@ set title
 
 " \Psy\Shell::debug(); does not work!
 " iabbr <silent> de \Psy\Shell::debug();<c-r>=Eatchar('\m\s\<bar>/')<cr>
-iabbr <silent> de eval(\Psy\sh());<c-r>=Eatchar('\m\s\<bar>/')<cr>
-iabbr <silent> yt Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
-iabbr <silent> ytp <?= Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
+" iabbr <silent> de eval(\Psy\sh());<c-r>=Eatchar('\m\s\<bar>/')<cr>
+" iabbr <silent> yt Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
+" iabbr <silent> ytp <?= Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
+
+" for Phalcon PHP framework
+iabbr <silent> de $app->log->debug("" . print_r($var, true));<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
 " https://stackoverflow.com/questions/6980749/simpler-way-to-put-pdb-breakpoints-in-python-code
 au FileType python map <silent> <leader>b oimport pdb; pdb.set_trace()<esc>
@@ -258,10 +261,13 @@ nnoremap <C-W><C-F> <C-W>vgf
 " \ 'break_on_open': 0
 " \}
 
-let g:vdebug_options = {
-\ 'port': 10000,
-\ 'break_on_open': 0
-\}
+" let g:vdebug_options = {
+" \ 'path_maps': {"/home/ubuntu/testfit/testfit-web": "/Users/markw/Development/testfit-io/testfit-web" },
+" \ 'port': 9000,
+" \ 'break_on_open': 0,
+" \ "ide_key" : 'markw'
+" \}
+
 
 
 " PHP documentor
