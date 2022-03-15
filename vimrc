@@ -115,6 +115,21 @@ call plug#end()
 " Set the title of the iterm tab
 set title
 
+" https://sidneyliebrand.medium.com/vim-tip-persistent-undo-2fc78a2973a7
+if has('persistent_undo')
+    " define a path to store persistent undo files.
+    let target_path = expand('~/.vim/vim-persisted-undo/')
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call system('mkdir -p ' . target_path)
+    endif
+    " point Vim to the defined undo directory.
+    let &undodir = target_path
+    " finally, enable undo persistence.
+    set undofile
+endif
+
 "abbreviations
 
 " example usage to make abbreviation pre 'page1preowned@gmail.com'
