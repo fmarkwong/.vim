@@ -82,6 +82,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'pangloss/vim-javascript'
   Plug 'neoclide/vim-jsx-improve'
   Plug 'mattn/emmet-vim'
+  Plug 'ngmy/vim-rubocop'
 
   " plugins to consider 
   " Plug 'dhruvasagar/vim-dotoo'
@@ -94,7 +95,7 @@ call plug#begin('~/.vim/plugged')
   " Not using
   " Plug 'chrisbra/csv.vim'
   " Plug 'szw/vim-maximizer'
-  " Plug 'syntastic/syntax_checkers/ruby/rubylint.vim'
+  Plug 'syntastic/syntax_checkers/ruby/rubylint.vim'
 
   " PHP Plugins
   " Plug 'captbaritone/better-indent-support-for-php-with-html'
@@ -141,8 +142,13 @@ endif
 " iabbr <silent> yt Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
 " iabbr <silent> ytp <?= Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
+iabbr <silent> br \Psy\Shell::debug(get_defined_vars());<c-r>=Eatchar('\m\s\<bar>/')<cr>
 " for Phalcon PHP framework
 iabbr <silent> de $app->log->debug("" . print_r($var, true));<c-r>=Eatchar('\m\s\<bar>/')<cr>
+" for testfit php portal server:
+" $app->log->debug prints to .logs/bf_web.log
+" error_log prints to the php built in server logs
+
 
 " https://stackoverflow.com/questions/6980749/simpler-way-to-put-pdb-breakpoints-in-python-code
 au FileType python map <silent> <leader>b oimport pdb; pdb.set_trace()<esc>
@@ -410,11 +416,9 @@ let g:syntastic_enable_elixir_checker = 1
 let g:syntastic_elixir_checkers = ["elixir"]
 let g:syntastic_elixir_elixir_args = '+elixirc'
 
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": ["ruby", "php", "javascript"],
-    \ "passive_filetypes": ["elixir"] }
 
+" let g:syntastic_ruby_checkers = ["rubocop"]
+" let g:syntastic_enable_ruby_checker = 0
 " change cursor shape in different modes for OSX iTerm2
 " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
