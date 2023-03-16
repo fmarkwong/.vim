@@ -589,8 +589,10 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-set background=dark
+set termguicolors
 colorscheme ir_black
+set background=dark
+
 
 " makes new windows (e.g. vnew|new) appear on right
 set splitright
@@ -616,7 +618,7 @@ autocmd FileType c setlocal shiftwidth=4 tabstop=4
 set nohlsearch "disable search highlight
 set incsearch
 set laststatus=2 " option 2, always display status line (displays filename)
-syntax on         " turn of syntax highlighting
+syntax on
 set smartindent
 " filetype plugin on
 " set omnifunc=syntaxcomplete#Complete " don't we need this since we have YouComplete me
