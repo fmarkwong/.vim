@@ -50,7 +50,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
   Plug 'tell-k/vim-browsereload-mac'
   Plug 'Chiel92/vim-autoformat'
-  Plug 'vim-vdebug/vdebug'
+  " Plug 'vim-vdebug/vdebug'
   Plug 'sheerun/vim-polyglot'
   Plug 'wesgibbs/vim-irblack'
   Plug 'mileszs/ack.vim'
@@ -68,7 +68,8 @@ call plug#begin('~/.vim/plugged')
   " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'frozen': 1 }
   " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   " Plug 'craigemery/vim-autotag'
-  Plug 'scrooloose/syntastic'
+  " Plug 'scrooloose/syntastic'
+  Plug 'dense-analysis/ale'
 
   Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-surround'
@@ -82,7 +83,8 @@ call plug#begin('~/.vim/plugged')
   " Plug 'pangloss/vim-javascript'
   Plug 'neoclide/vim-jsx-improve'
   Plug 'mattn/emmet-vim'
-  Plug 'ngmy/vim-rubocop'
+  " Plug 'ngmy/vim-rubocop'
+  Plug 'romainl/vim-qf'
 
   " plugins to consider 
   " Plug 'dhruvasagar/vim-dotoo'
@@ -95,7 +97,7 @@ call plug#begin('~/.vim/plugged')
   " Not using
   " Plug 'chrisbra/csv.vim'
   " Plug 'szw/vim-maximizer'
-  Plug 'syntastic/syntax_checkers/ruby/rubylint.vim'
+  " Plug 'syntastic/syntax_checkers/ruby/rubylint.vim'
 
   " PHP Plugins
   " Plug 'captbaritone/better-indent-support-for-php-with-html'
@@ -115,6 +117,9 @@ call plug#end()
 "
 " Set the title of the iterm tab
 set title
+
+" https://stackoverflow.com/a/67929452/7765761
+vmap <leader>gl :Gclog<CR>
 
 " https://sidneyliebrand.medium.com/vim-tip-persistent-undo-2fc78a2973a7
 if has('persistent_undo')
@@ -175,10 +180,9 @@ if !has('gui_running') "exclude for MacVim
 " http://stackoverflow.com/questions/4608161/copy-text-out-of-vim-with-set-mouse-a-enabled
 set mouse=nicr
 
-" Set this to the name of your terminal that supports mouse codes.
-" Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
-" http://usevim.com/2012/05/16/mouse/
-set ttymouse=xterm2
+
+" https://stackoverflow.com/questions/7000960/in-vim-why-doesnt-my-mouse-work-past-the-220th-column
+set ttymouse=sgr
 endif
 
 " for browserreload-mac plugin https://browsereload-macvim.readthedocs.org/en/latest/
@@ -419,6 +423,26 @@ let g:syntastic_elixir_elixir_args = '+elixirc'
 
 " let g:syntastic_ruby_checkers = ["rubocop"]
 " let g:syntastic_enable_ruby_checker = 0
+
+
+let g:ale_enabled = 1
+let g:ale_linters = {
+\   'ruby': ['standardrb'],
+\   'javascript': ['eslint'],
+\}
+
+let g:ale_fixers = {
+\    'ruby': ['standardrb'],
+\}
+
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+" let g:ale_lint_on_text_changed = 'never'
+let g:ale_fix_on_save = 1
+
+" https://github.com/testdouble/standard/wiki/IDE:-vim
+let g:ruby_indent_assignment_style = 'variable'
 " change cursor shape in different modes for OSX iTerm2
 " http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
