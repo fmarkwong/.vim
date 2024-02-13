@@ -85,7 +85,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/vim-jsx-improve'
   Plug 'mattn/emmet-vim'
   " Plug 'ngmy/vim-rubocop'
-  Plug 'romainl/vim-qf'
+
+  " Plug 'romainl/vim-qf' "https://stackoverflow.com/questions/76020586/vim-quickfix-window-automatically-open-file-to-view-by-focusing-on-it-without-p/76021219?noredirect=1#comment134095172_76021219
 
   " plugins to consider 
   " Plug 'dhruvasagar/vim-dotoo'
@@ -731,3 +732,6 @@ endif
 if executable(local_flow)
   let g:flow#flowpath = local_flow
 endif
+
+" https://stackoverflow.com/questions/237289/vim-configure-line-number-coloring
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
