@@ -150,7 +150,8 @@ endif
 " iabbr <silent> yt Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
 " iabbr <silent> ytp <?= Yii::t('app', 'text')<c-r>=Eatchar('\m\s\<bar>/')<cr>
 
-iabbr <silent> br \Psy\Shell::debug(get_defined_vars());<c-r>=Eatchar('\m\s\<bar>/')<cr>
+" iabbr <silent> br \Psy\Shell::debug(get_defined_vars());<c-r>=Eatchar('\m\s\<bar>/')<cr>
+iabbr <silent> br require IEx; IEx.pry<c-r>=Eatchar('\m\s\<bar>/')<cr>
 " for Phalcon PHP framework
 iabbr <silent> de $app->log->debug("" . print_r($var, true));<c-r>=Eatchar('\m\s\<bar>/')<cr>
 " for testfit php portal server:
