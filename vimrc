@@ -42,6 +42,7 @@ endif
 
 " When making changes, remember to source $VIMRC before PlugInstall/Update
 call plug#begin('~/.vim/plugged')
+  Plug 'github/copilot.vim'
   Plug 'stefandtw/quickfix-reflector.vim'
   Plug 'elixir-editors/vim-elixir'
   Plug 'tpope/vim-eunuch'
