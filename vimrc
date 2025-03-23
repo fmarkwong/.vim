@@ -566,7 +566,7 @@ map <leader>n :NERDTreeFind<CR>
 let g:NERDTreeDirArrows = 1
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'w'
 let g:ctrlp_match_window = 'max:30'
 let g:ctrlp_extensions = ['tag', 'buffertag']
 
